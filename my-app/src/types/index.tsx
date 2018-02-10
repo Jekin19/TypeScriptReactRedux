@@ -4,5 +4,5 @@ export interface Book {
 }
 
 export interface BookStore {
-  books: Book[];
+  bookReducer: Book[];
 }

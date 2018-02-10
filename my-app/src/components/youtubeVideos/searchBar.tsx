@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 class SearchBar extends React.Component< any, any> {
   constructor(props: any) {
     super(props);
@@ -18,7 +17,7 @@ class SearchBar extends React.Component< any, any> {
     );
   }
 
-  onInputChange(term) {
+  onInputChange(term: string) {
     this.setState({term});
     this.props.onSearchTermChange(term);
   }
