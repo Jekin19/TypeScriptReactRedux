@@ -10,9 +10,10 @@ import '../node_modules/ag-grid/dist/styles/theme-fresh.css';
 import { createStore, combineReducers } from 'redux';
 import App from './components/app';
 import Reducers from './reducers/reducer_books';
+import ActivebookReducer from './reducers/reducer_active_book';
 import { Provider } from 'react-redux';
 
-const rootReducer = combineReducers({bookReducer: Reducers});
+const rootReducer = combineReducers({bookReducer: Reducers, activebookReducer: ActivebookReducer});
 const store = createStore(rootReducer);
 
 ReactDOM.render(

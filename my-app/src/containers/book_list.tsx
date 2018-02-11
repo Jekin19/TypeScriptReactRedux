@@ -1,26 +1,27 @@
 import * as React from 'react';
 import { BookStore, Book } from '../types';
-import { connect } from 'react-redux';
+import { connect, Dispatch } from 'react-redux';
 import BookDetails from './book_details';
+import { bindActionCreators } from 'redux';
+import { SelectBookAction } from '../actions/select_book';
 
-export interface Props {
-  books: Book[];
-  selectedBook: Book;
+interface ActionProp {
+  selectedBook?: (book: Book) => void;
 }
 
-class BookList extends React.Component<Props, Props> {
-constructor (props: Props) {
-  super (props);
-  this.state = {
-    books: [],
-    selectedBook: null
-  };
+interface Prop {
+books: Book[];
 }
+
+interface Props extends ActionProp, Prop {
+}
+
+class BookList extends React.Component<Props> {
 
   renderList() {
     return this.props.books.map((book) => {
     return(
-      <li key={book.title} onClick={() => this.setState({selectedBook: book})}>
+      <li key={book.title} onClick={() => this.props.selectedBook(book)}>
         {book.title}
       </li>
       );
@@ -28,9 +29,8 @@ constructor (props: Props) {
   }
 
   render() {
-    const p = this.props;
-    if (!p) {
-      return (<div> hello </div>);
+    if (!this.props.books) {
+      return (<div> No Books </div>);
     }
     return (
       <div>
@@ -38,17 +38,27 @@ constructor (props: Props) {
         <ul>
           {this.renderList()}
         </ul>
-        <BookDetails book={this.state.selectedBook}/>
+        <BookDetails/>
       </div>
     );
   }
 }
 
-function mapStateToProps(state: BookStore ): Props {
+function mapStateToProps(state: BookStore ): Prop {
   return {
-    books: state.bookReducer,
-    selectedBook: state.bookReducer[0]
+    books: state.bookReducer
   };
 }
 
-export default connect<Props, {}, Props>(mapStateToProps)(BookList);
+// Same as below 
+// function mapDispatchToProps(dispatch ): ActionProp {
+//    return bindActionCreators({selectedBook: SelectBookAction}, dispatch);
+// }
+
+function mapDispatchToProps(dispatch: Dispatch<ActionProp> ): ActionProp {
+  return {
+    selectedBook: book => dispatch(SelectBookAction(book))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookList);
