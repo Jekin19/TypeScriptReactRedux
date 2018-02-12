@@ -1,13 +1,14 @@
 import { Book } from '../types';
+import * as constant from '../types/constants';
 
 export interface SelectBook {
-  type: string;
+  type: constant.ActionTypes;
   payload: Book;
 }
 
 export function SelectBookAction(book: Book): SelectBook {
   return {
-    type: 'BOOK_SELECTED',
+    type: constant.ActionTypes.BOOK_SELECTED,
     payload: book
   };
 }
