@@ -3,6 +3,10 @@
   text-align: center;
 }
 
+.chart-bar{
+  height: 400px;
+  width: 100%;
+}
 .search-bar input {
   width: 75%;
 }

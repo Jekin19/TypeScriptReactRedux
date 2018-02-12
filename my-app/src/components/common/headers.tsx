@@ -11,6 +11,7 @@ class Header extends React.Component {
                 <li><Link to="/gridsample">AG Grid</Link></li>
                 <li><Link to="/youtubesample">Video Search</Link></li>
                 <li><Link to="/reduxsample">Redux</Link></li>
+                <li><Link to="/chartsample">Charts</Link></li>
                 <li><Link to="/about">About</Link></li>
               </ul>
           </div>
